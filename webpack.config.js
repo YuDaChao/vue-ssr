@@ -1,10 +1,12 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
   entry: path.join(__dirname, 'src/index.js'),
   output: {
+    publicPath: '/',
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist')
   },
@@ -49,7 +51,14 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    publicPath: '/',
+    hot: true
+  },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public/index.html')
+    })
   ]
 }
