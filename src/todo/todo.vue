@@ -4,10 +4,17 @@
       class="add-input"
       placeholder="接下来要做什么？"
       autofocus
+      v-model="content"
       @keyup.enter="addTodo"
     >
-    <todo-item :todo="todo" />
+    <todo-item
+      v-for="todo in filterTodos"
+      :todo="todo"
+      :key="todo.id"
+      @delete="handleDeleteTodo"
+    />
     <v-tabs
+      :count="unFinishedTodoCount"
       :filter="filter"
       :filter-todo="handleToggleTodo"
       :clear-all-completed="handleClearAllCompleted"
@@ -25,20 +32,47 @@
     },
     data () {
       return {
+        id: 0,
+        content: '',
         filter: 'all',
-        todo: {
-          id: 1,
-          content: 'this is a todo',
-          completed: false
+        todos: []
+      }
+    },
+    computed: {
+      unFinishedTodoCount() {
+        return this.todos.filter(todo => !todo.completed).length
+      },
+      filterTodos () {
+        if (this.filter === 'completed') {
+          return this.todos.filter(todo => todo.completed)
+        } else if (this.filter === 'active') {
+          return this.todos.filter(todo => !todo.completed)
+        } else {
+          return this.todos
         }
       }
     },
     methods: {
-      addTodo () {},
+      addTodo (e) {
+        this.todos.unshift({
+          id: ++this.id,
+          content: this.content,
+          completed: false
+        })
+        this.content = ''
+      },
       handleToggleTodo (state) {
         this.filter = state
       },
-      handleClearAllCompleted () {}
+      handleDeleteTodo (id) {
+        this.todos.splice(
+          this.todos.findIndex(todo => todo.id === id),
+          1
+        )
+      },
+      handleClearAllCompleted () {
+        this.todos = this.todos.filter(todo => !todo.completed)
+      }
     }
   }
 </script>
