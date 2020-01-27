@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import VTodo from './todo/index.vue'
+  import VTodo from './views/index.vue'
   export default {
     components: {
       VTodo

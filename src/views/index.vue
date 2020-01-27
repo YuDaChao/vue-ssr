@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  import VHeader from './header.vue'
-  import VTodo from './todo.vue'
-  import VFooter from './footer.jsx'
+  import VHeader from '../layout/header.vue'
+  import VTodo from './todo/todo.vue'
+  import VFooter from '../layout/footer.jsx'
   export default {
     components: {
       VHeader,
@@ -19,6 +19,6 @@
   }
 </script>
 
-<style>
+<style lang="less">
   .main {}
 </style>

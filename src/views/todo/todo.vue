@@ -24,7 +24,7 @@
 
 <script>
   import TodoItem from './todo-item.vue'
-  import VTabs from './tabs.vue'
+  import VTabs from './todo-tabs.vue'
   export default {
     components: {
       TodoItem,
