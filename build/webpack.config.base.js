@@ -2,6 +2,9 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const createVueLoaderOptions = require('./vue-loader-options')
+
+
 const baseConfig = {
   mode: process.env.NODE_ENV || 'production',
   target: 'web',
@@ -24,7 +27,8 @@ const baseConfig = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: createVueLoaderOptions()
       },
       {
         test: /\.(png|jpg|gif|svg)$/i,
@@ -41,8 +45,8 @@ const baseConfig = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new CleanWebpackPlugin()
   ]
 }
 

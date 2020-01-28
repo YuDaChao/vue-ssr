@@ -1,14 +1,18 @@
 <template>
-  <div class="main-header">
-    <h1 class="title">Vue Todo</h1>
+  <div :class="$style.mainHeader">
+    <h1 :class="$style.title">Vue Todo</h1>
   </div>
 </template>
 
 <script>
-  export default {}
+  export default {
+    created () {
+      console.log(this.$style)
+    }
+  }
 </script>
 
-<style lang="less">
+<style lang="less" module>
   .main-header {
     .title {
       text-align: center;

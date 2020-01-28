@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
+
 const devMode = process.env.NODE_ENV !== 'production'
 
 let config = {}
@@ -15,30 +16,51 @@ const defaultPlugins = [
   })
 ]
 
-// 开发
+// 开发环境
 if (devMode) {
   config = merge(baseConfig, {
     module: {
       rules: [
         {
           test: /\.less$/,
-          use: [
+          oneOf: [
             {
-              loader: 'style-loader'
+              resourceQuery: /module/i,
+              use: [
+                'vue-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: {
+                      localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    },
+                    importLoaders: 2,
+                    localsConvention: 'camelCase'
+                  }
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'less-loader'
+              ]
             },
             {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'less-loader'
+              use: [
+                'vue-style-loader',
+                'css-loader',
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'less-loader'
+              ]
             }
-          ]
+          ],
         }
       ]
     },
@@ -46,7 +68,13 @@ if (devMode) {
       publicPath: '/',
       hot: true
     },
-    plugins: defaultPlugins
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+      }),
+      ...defaultPlugins
+    ]
   })
 } else {
   config = merge(baseConfig, {
@@ -60,13 +88,40 @@ if (devMode) {
       rules: [
         {
           test: /\.less$/,
-          use: [{
-            loader: MiniCssExtractPlugin.loader
-          },
-            'css-loader',
-            'postcss-loader',
-            'less-loader'
-          ]
+          oneOf: [
+            {
+              resourceQuery: /module/,
+              use: [
+                'vue-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: {
+                      localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    },
+                    importLoaders: 2,
+                    localsConvention: 'camelCase'
+                  }
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                'less-loader'
+              ]
+            },
+            {
+              use: [{
+                loader: MiniCssExtractPlugin.loader
+              },
+                'css-loader',
+                'postcss-loader',
+                'less-loader'
+              ]
+            }
+          ],
         }
       ]
     },
