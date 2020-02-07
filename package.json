@@ -8,6 +8,7 @@
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
     "build": "npm run clear && npm run build:client",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+    "dev:practice": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.practice.js",
     "clear": "rimraf dist"
   },
   "keywords": [
