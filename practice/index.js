@@ -1,1 +1,2 @@
-import './lifecyle'
+// import './lifecyle'
+import './component'

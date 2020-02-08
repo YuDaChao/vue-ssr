@@ -7,14 +7,14 @@ const app = new Vue({
       text: 0
     }
   },
-  // 当创建Vue实例时，就会执行 beforeCreate created
+  // 当创建Vue实例时，就会执行 beforeCreate created，此时的$el不可见
   beforeCreate () {
     console.log('beforeCreate')
   },
   created () {
     console.log('created')
   },
-  // 挂载DOM时，执行 beforeMount mounted
+  // 挂载DOM时，执行 beforeMount mounted，$el可见
   beforeMount () {
     console.log('beforeMount')
   },
