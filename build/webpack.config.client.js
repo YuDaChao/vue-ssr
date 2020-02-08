@@ -65,8 +65,11 @@ if (devMode) {
       ]
     },
     devServer: {
-      publicPath: '/',
-      hot: true
+      publicPath: '/public/',
+      hot: true,
+      historyApiFallback: {
+        index: '/public/index.html' // 跟路径路径和output.publicPath一致
+      }
     },
     plugins: [
       new MiniCssExtractPlugin({

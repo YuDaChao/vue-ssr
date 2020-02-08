@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     <div id="cover"></div>
-    <v-todo />
+    <v-header />
+    <router-view />
+    <v-footer />
   </div>
 </template>
 
 <script>
-  import VTodo from './views/index.vue'
+  import VHeader from './layout/header.vue'
+  import VFooter from './layout/footer.jsx'
   export default {
     components: {
-      VTodo
+      VHeader,
+      VFooter
     }
   }
 </script>
