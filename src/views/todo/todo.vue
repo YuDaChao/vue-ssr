@@ -27,6 +27,9 @@
   import TodoItem from './todo-item.vue'
   import VTabs from './todo-tabs.vue'
   export default {
+    metaInfo: {
+      title: 'Todo App'
+    },
     // 组件内路由守卫
     beforeRouteEnter (to, from, next) {
       // 在渲染该组件的对应路由被 confirm 前调用

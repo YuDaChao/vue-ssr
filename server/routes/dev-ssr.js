@@ -42,6 +42,7 @@ const handleSSR = async (ctx) => {
   const template = fs.readFileSync(path.join(__dirname, '../server.template.ejs'), 'utf-8')
   const renderer = VueServerRenderer.createBundleRenderer(bundle, {
     runInNewContext: false,
+    // 手动执行资源注入
     inject: false,
     clientManifest: data
   })

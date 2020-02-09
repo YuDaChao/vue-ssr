@@ -6,6 +6,9 @@
 
 <script lang="js">
 	export default {
-	  name: 'login'
+	  name: 'login',
+		metaInfo: {
+	    title: 'Login'
+		}
 	}
 </script>

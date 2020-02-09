@@ -86,7 +86,7 @@ if (devMode) {
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../src/index.js')
+      app: path.join(__dirname, '../src/client.js')
     },
     output: {
       filename: 'js/bundle.[chunkHash:8].js'
