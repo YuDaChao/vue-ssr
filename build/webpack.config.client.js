@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 const baseConfig = require('./webpack.config.base')
 
 const devMode = process.env.NODE_ENV !== 'production'
@@ -13,7 +14,10 @@ let config = {}
 const defaultPlugins = [
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '../public/index.html')
-  })
+  }),
+  // 此插件在输出目录中
+  // 生成 `vue-ssr-client-manifest.json`。
+  new VueClientPlugin()
 ]
 
 // 开发环境

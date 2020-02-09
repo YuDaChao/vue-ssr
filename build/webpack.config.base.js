@@ -10,7 +10,7 @@ const baseConfig = {
   target: 'web',
   entry: path.join(__dirname, '../src/index.js'),
   output: {
-    publicPath: '/public/',
+    publicPath: 'http://localhost:8080/public/',
     filename: 'bundle.js',
     path: path.join(__dirname, '../dist')
   },

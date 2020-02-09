@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import store from './store'
+import createStore from './store'
 import createRouter from './router'
 import createRouterInterceptor from './router/router.interceptor'
 
@@ -9,6 +9,7 @@ import App from './app.vue'
 import './assets/styles/index.less'
 
 const router = createRouter()
+const store = createStore()
 
 createRouterInterceptor(router)
 
