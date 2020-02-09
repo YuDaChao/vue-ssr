@@ -5,10 +5,10 @@
       placeholder="接下来要做什么？"
       autofocus
       v-model="content"
-      @keyup.enter="addTodo"
+      @keyup.enter="handleAddTodo"
     >
     <todo-item
-      v-for="todo in filterTodos"
+      v-for="todo in filterTodoList"
       :todo="todo"
       :key="todo.id"
       @delete="handleDeleteTodo"
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import { mapState, mapMutations, mapGetters } from 'vuex'
   import TodoItem from './todo-item.vue'
   import VTabs from './todo-tabs.vue'
   export default {
@@ -55,45 +56,43 @@
     data () {
       return {
         id: 0,
-        content: '',
-        filter: 'all',
-        todos: []
+        content: ''
       }
     },
     computed: {
-      unFinishedTodoCount() {
-        return this.todos.filter(todo => !todo.completed).length
-      },
-      filterTodos () {
-        if (this.filter === 'completed') {
-          return this.todos.filter(todo => todo.completed)
-        } else if (this.filter === 'active') {
-          return this.todos.filter(todo => !todo.completed)
-        } else {
-          return this.todos
-        }
-      }
+      ...mapState('todo', {
+        todos: state => state.todoList,
+        filter: state => state.filter
+      }),
+      ...mapGetters('todo', [
+          'unFinishedTodoCount',
+          'filterTodoList'
+      ])
     },
     methods: {
-      addTodo (e) {
-        this.todos.unshift({
+      ...mapMutations('todo', [
+          'addTodo',
+          'deleteTodoById',
+          'clearAllCompletedTodo',
+          'changeFilter'
+      ]),
+      handleAddTodo (e) {
+        const todo = {
           id: ++this.id,
           content: this.content,
           completed: false
-        })
+        }
+        this.addTodo(todo)
         this.content = ''
       },
-      handleToggleTodo (state) {
-        this.filter = state
+      handleToggleTodo (filter) {
+        this.changeFilter(filter)
       },
       handleDeleteTodo (id) {
-        this.todos.splice(
-          this.todos.findIndex(todo => todo.id === id),
-          1
-        )
+        this.deleteTodoById(id)
       },
       handleClearAllCompleted () {
-        this.todos = this.todos.filter(todo => !todo.completed)
+        this.clearAllCompletedTodo()
       }
     }
   }
