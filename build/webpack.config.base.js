@@ -37,7 +37,7 @@ const baseConfig = {
             loader: 'url-loader',
             options: {
               limit: 1024, // 小于1024字节 编译成base64
-              name: 'resources/[path][name].[hash:8].[ext]'
+              name: 'images/[name].[hash:8].[ext]'
             }
           }
         ]

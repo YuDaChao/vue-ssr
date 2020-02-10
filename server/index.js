@@ -1,7 +1,8 @@
 const Koa = require('koa')
 
+const staticRouter = require('./routes/static')
+
 const app = new Koa()
-const router = require('./routes')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -15,6 +16,16 @@ app.use(async (ctx, next) => {
     ctx.body = err.message
   }
 })
+
+app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
+
+let router
+
+if (isDev) {
+  router = require('./routes/dev')
+} else {
+  router = require('./routes/pro')
+}
 
 app.use(router.routes()).use(router.allowedMethods())
 

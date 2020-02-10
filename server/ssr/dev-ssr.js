@@ -2,20 +2,26 @@ const path = require('path')
 const axios = require('axios')
 const fs = require('fs')
 const webpack = require('webpack')
+// const webpackDevMiddleware = require('koa-webpack-dev-middleware')
+// const webpackHotMiddleware = require('koa-webpack-hot-middleware')
 const MemoryFs = require('memory-fs')
 const VueServerRenderer = require('vue-server-renderer')
 
 const serverRender = require('./server-render')
 
 const serverConfig = require('../../build/webpack.config.server')
+// const clientConfig = require('../../build/webpack.config.client')
 
 const mfs = new MemoryFs()
 
 const serverCompiler = webpack(serverConfig)
+// const clientCompiler = webpack(clientConfig)
 
 serverCompiler.outputFileSystem = mfs
+// clientConfig.outputFileSystem = mfs
 
 let bundle
+let clientManifest
 
 serverCompiler.watch({}, (err, stats) => {
   if (err) { throw err}
@@ -32,6 +38,22 @@ serverCompiler.watch({}, (err, stats) => {
     console.log('bundle is generated')
   }
 })
+
+// clientCompiler.watch({}, (err, stats) => {
+//   if (err) { throw err }
+//   else {
+//     stats = stats.toJson()
+//     stats.errors.forEach(err => console.error(err))
+//     stats.warnings.forEach(err => console.warn(err))
+//     if (stats.errors.length) return
+//     const bundlePath = path.join(
+//       clientConfig.output.path,
+//       'vue-ssr-client-manifest.json'
+//     )
+//     clientManifest = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
+//     console.log('clientManifest is generated')
+//   }
+// })
 
 const handleSSR = async (ctx) => {
   if (!bundle) {

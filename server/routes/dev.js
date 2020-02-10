@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 
-const handleSSR = require('./dev-ssr')
+const handleSSR = require('../ssr/dev-ssr')
 
 const router = new Router()
 router.get('*', handleSSR)
