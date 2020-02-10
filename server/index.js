@@ -1,3 +1,4 @@
+require('regenerator-runtime')
 const Koa = require('koa')
 
 const staticRouter = require('./routes/static')

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { mapState, mapMutations, mapGetters } from 'vuex'
+  import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
   import TodoItem from './todo-item.vue'
   import VTabs from './todo-tabs.vue'
   export default {
@@ -72,12 +72,18 @@
           'filterTodoList'
       ])
     },
+    asyncData ({ store }) {
+      store.dispatch('todo/fetchTodoList')
+    },
     methods: {
       ...mapMutations('todo', [
           'addTodo',
           'deleteTodoById',
           'clearAllCompletedTodo',
           'changeFilter'
+      ]),
+      ...mapActions('todo', [
+          'fetchTodoList'
       ]),
       handleAddTodo (e) {
         const todo = {

@@ -4,12 +4,13 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["ie 11"]
+          "browsers": [ "last 2 versions", "ie >= 9" ]
         }
       }
     ]
   ],
   "plugins": [
-    "transform-vue-jsx"
+    "transform-vue-jsx",
+    "@babel/plugin-transform-regenerator"
   ]
 }

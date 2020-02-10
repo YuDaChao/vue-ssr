@@ -1,3 +1,7 @@
+import {
+  queryTodoList
+} from '../../api/index'
+
 const state = {
   todoList: [],
   filter: 'all'
@@ -22,6 +26,9 @@ const mutations = {
   addTodo (state, todo) {
     state.todoList.push(todo)
   },
+  setTodoList (state, todos) {
+    state.todoList = todos
+  },
   deleteTodoById (state, id) {
     state.todoList.splice(
       state.todoList.findIndex(todo => todo.id === id),
@@ -36,7 +43,12 @@ const mutations = {
   }
 }
 
-const actions = {}
+const actions = {
+  async fetchTodoList ({ commit }) {
+    const data = await queryTodoList()
+    commit('setTodoList', data)
+  }
+}
 
 export default {
   namespaced: true,

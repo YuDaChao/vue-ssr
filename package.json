@@ -24,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-regenerator": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "autoprefixer": "^9.7.4",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
@@ -46,6 +47,7 @@
     "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "postcss-loader": "^3.0.0",
+    "regenerator-runtime": "^0.13.3",
     "rimraf": "^3.0.0",
     "style-loader": "^1.1.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
