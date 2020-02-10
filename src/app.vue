@@ -2,6 +2,8 @@
   <div id="app">
     <div id="cover"></div>
     <v-header />
+    <router-link to="/todo">todo</router-link>
+    <router-link to="/login">login</router-link>
     <transition name="fade">
       <router-view />
     </transition>
