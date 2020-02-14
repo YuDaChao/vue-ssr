@@ -6,7 +6,11 @@ import createRouterInterceptor from './router/router.interceptor'
 
 import App from './app.vue'
 
+import Notification from './views/component/notification'
+
 import './assets/styles/index.less'
+
+Vue.use(Notification)
 
 const router = createRouter()
 const store = createStore()

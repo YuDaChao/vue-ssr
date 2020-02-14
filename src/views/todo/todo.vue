@@ -1,5 +1,6 @@
 <template>
   <div class="main-todo">
+    <button @click="notify">通知</button>
     <input
       class="add-input"
       placeholder="接下来要做什么？"
@@ -75,6 +76,8 @@
     asyncData ({ store }) {
       store.dispatch('todo/fetchTodoList')
     },
+    mounted () {
+    },
     methods: {
       ...mapMutations('todo', [
           'addTodo',
@@ -85,6 +88,12 @@
       ...mapActions('todo', [
           'fetchTodoList'
       ]),
+      notify () {
+        this.$notify({
+          title: '通知组件',
+          position: 'top-right'
+        })
+      },
       handleAddTodo (e) {
         const todo = {
           id: ++this.id,

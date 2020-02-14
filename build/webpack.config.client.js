@@ -71,6 +71,7 @@ if (devMode) {
     devServer: {
       publicPath: '/public/',
       hot: true,
+      headers: { 'Access-Control-Allow-Origin': '*' },
       historyApiFallback: {
         index: '/public/index.html' // 跟路径路径和output.publicPath一致
       }

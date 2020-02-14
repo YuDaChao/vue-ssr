@@ -6,8 +6,10 @@ import createStore from './store'
 import './assets/styles/index.less'
 
 import App from './app.vue'
+import Notification from './views/component/notification'
 
 Vue.use(Meta)
+Vue.use(Notification)
 
 export default () => {
   const router = createRouter()
