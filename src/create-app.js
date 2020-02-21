@@ -7,9 +7,13 @@ import './assets/styles/index.less'
 
 import App from './app.vue'
 import Notification from './views/component/notification'
+import Tabs from './views/component/tabs/tabs.vue'
+import Tab from './views/component/tabs/tab.vue'
 
 Vue.use(Meta)
 Vue.use(Notification)
+Vue.component(Tabs.name, Tabs)
+Vue.component(Tab.name, Tab)
 
 export default () => {
   const router = createRouter()

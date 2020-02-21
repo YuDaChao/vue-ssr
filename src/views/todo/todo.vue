@@ -1,6 +1,15 @@
 <template>
   <div class="main-todo">
-    <button @click="notify">通知</button>
+    <div class="tabs-wrapper">
+      <tabs :value="filter" @on-change="handleTabChange">
+        <tab label="all" index="all">
+        </tab>
+        <tab label="active" index="active">
+        </tab>
+        <tab label="completed" index="completed">
+        </tab>
+      </tabs>
+    </div>
     <input
       class="add-input"
       placeholder="接下来要做什么？"
@@ -60,7 +69,8 @@
     data () {
       return {
         id: 0,
-        content: ''
+        content: '',
+        currentTab: 'all'
       }
     },
     computed: {
@@ -88,6 +98,9 @@
       ...mapActions('todo', [
           'fetchTodoList'
       ]),
+      handleTabChange (tab) {
+        this.handleToggleTodo(tab)
+      },
       notify () {
         this.$notify({
           title: '通知组件',
@@ -121,6 +134,12 @@
     width: 600px;
     margin: 0 auto;
     box-shadow: 0 0 5px #666;
+    background-color: #fff;
+    .tabs-wrapper {
+      padding: 0 24px;
+      background-color: #fff;
+      margin-bottom: 12px;
+    }
     .add-input {
       width: 100%;
       font-size: 24px;

@@ -1,16 +1,6 @@
 <template>
   <div class="main-tabs">
     <span class="left">{{ count }} items left</span>
-    <span class="tabs">
-      <span
-        v-for="state in states"
-        :key="state"
-        :class="[ 'state', filter === state ? 'current' : '' ]"
-        @click="filterTodo(state)"
-      >
-        {{ state }}
-      </span>
-    </span>
     <span class="clear" @click="clearAllCompleted">Clear Completed</span>
   </div>
 </template>
